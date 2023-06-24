@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { GET_REPOSITORIES } from '../graphql/queries';
-import { object } from 'yup';
 
 
 const useRepositoriesThroughREST = () => {
