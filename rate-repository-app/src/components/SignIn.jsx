@@ -120,16 +120,29 @@ const SignInForm = ({ onSubmit }) => {
     );
 };
 
+import useSignIn from '../hooks/useSignIn';
+
 const SignIn = () => {
-    const onSubmit = values => {
+    const [signIn] = useSignIn()
+
+    const onSubmit = async values => {
         validationSchema.validate(values)
-        .then(function(values) {
-            console.log(values)
+        .then( function(values) {
+            console.log("Signing in with:",values)
+
         })
         .catch(function(err){
             console.log(err)
         })
+        try {
+            const {username, password} = values
+            const response = await signIn({username, password})
+            console.log("TOKEN:", response)
+        } catch (e) {
+            console.log(e)
+        }
     };
+    
 
     return (
         <Formik
