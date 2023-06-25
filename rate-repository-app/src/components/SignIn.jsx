@@ -121,6 +121,8 @@ const SignInForm = ({ onSubmit }) => {
 };
 
 import useSignIn from '../hooks/useSignIn';
+import AuthStorage from '../utils/authStorage';
+const auth = new AuthStorage()
 
 const SignIn = () => {
     const [signIn] = useSignIn()
@@ -137,7 +139,12 @@ const SignIn = () => {
         try {
             const {username, password} = values
             const response = await signIn({username, password})
-            console.log("TOKEN:", response)
+            auth.setAccessToken(response.data.authenticate.accessToken)
+            const fetchedToken = await auth.getAccessToken()
+            console.log("fetchedToken:", fetchedToken)
+            await auth.removeAccessToken()
+            const noToken = await auth.getAccessToken()
+            console.log("noToken:", noToken)
         } catch (e) {
             console.log(e)
         }
