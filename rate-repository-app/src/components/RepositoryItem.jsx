@@ -58,7 +58,7 @@ const RepositoryItem = ({ repo }) => {
                     <Text fontWeight="bold" fontSize="subheading">{repo.fullName}</Text>
                     <Text color="textSecondary" style={{}}>{repo.description}</Text>
                     <View style={styles.flexContainerHorizontal}>
-                        <Text style={{ backgroundColor: theme.colors.primary, color: 'white', padding: 3, flex: 0, borderRadius: 5, font: theme.fonts }}>{repo.language}</Text>
+                        <Text style={{ backgroundColor: theme.colors.primary, color: 'white', padding: 3, flex: 0, borderRadius: 5, font: theme.fonts, marginTop: 2 }}>{repo.language}</Text>
                     </View>
                 </View>
             </View>
