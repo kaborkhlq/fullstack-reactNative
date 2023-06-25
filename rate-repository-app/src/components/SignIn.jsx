@@ -3,15 +3,6 @@ import { Formik, useField } from 'formik';
 import theme from '../theme';
 import * as yup from 'yup';
 
-const initialValues = {
-    username: '',
-    password: '',
-};
-
-const validationSchema = yup.object().shape({
-    username: yup.string().required(),
-    password: yup.string().required(),
-});
 
 const styles = StyleSheet.create({
     errorText: {
@@ -124,8 +115,31 @@ import useSignIn from '../hooks/useSignIn';
 // import AuthStorage from '../utils/authStorage';
 // const auth = new AuthStorage()
 
+export const SignInContainer = ({onSubmit, validationSchema}) => {
+    const initialValues = {
+        username: '',
+        password: '',
+    };
+    
+    return (
+        <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validationSchema={validationSchema}
+            >
+            {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
+        </Formik>
+    );
+
+}
+
 const SignIn = () => {
     const [signIn] = useSignIn()
+
+    const validationSchema = yup.object().shape({
+        username: yup.string().required(),
+        password: yup.string().required(),
+    });
 
     const onSubmit = async values => {
         validationSchema.validate(values)
@@ -143,17 +157,9 @@ const SignIn = () => {
             console.log(e)
         }
     };
-    
 
-    return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={onSubmit}
-            validationSchema={validationSchema}
-            >
-            {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
-        </Formik>
-    );
+    return <SignInContainer onSubmit={onSubmit} validationSchema={validationSchema} />;
+
 };
 
 export default SignIn

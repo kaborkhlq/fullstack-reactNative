@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Text, TextInput, Pressable, View } from 'react-native';
 import { render, fireEvent, screen } from '@testing-library/react-native';
-import { RepositoryListContainer } from '../components/RepositoryList';
+import { RepositoryListContainer } from '../../components/RepositoryList';
 
 const Greeting = ({ name }) => {
   return (
