@@ -1,29 +1,8 @@
-import { useState, useEffect } from 'react';
-import { gql, useQuery } from '@apollo/client';
-import { GET_REPOSITORIES } from '../graphql/queries';
+import { useQuery } from '@apollo/client';
+import { GET_REPOSITORIES, GET_REPOSITORY } from '../graphql/queries';
 
 
-// const useRepositoriesThroughREST = () => {
-//     const [repositories, setRepositories] = useState();
-//     const [loading, setLoading] = useState(false);
-
-//     const fetchRepositories = async () => {
-//         setLoading(true);
-//         const response = await fetch('http://192.168.86.27:5000/api/repositories');
-//         const json = await response.json();
-//         setLoading(false);
-//         setRepositories(json);
-//     }
-
-//     useEffect(() => {
-//         fetchRepositories();
-//     }, []);
-
-//     return { repositories, loading, refetch: fetchRepositories };
-// };
-
-
-const useRepositoriesThroughGraphQl = () => {
+export const useRepositoriesThroughGraphQl = () => {
     const { loading, error, data} = useQuery(GET_REPOSITORIES, {
         fetchPolicy: 'cache-and-network',
     })
@@ -32,6 +11,15 @@ const useRepositoriesThroughGraphQl = () => {
     return { repositories, loading };
 };
 
+export const useRepository = (repositoryId) => {
+    console.log("id from userepository:", repositoryId)
+    const params = {
+        "repositoryId": repositoryId
+    }   
+    const { loading, error, data} =  useQuery(GET_REPOSITORY, {variables: params, fetchPolicy: 'cache-and-network',})
+    const repository = loading ? undefined : data.repository
+    return { repository, loading };
+};
 
 
 export default useRepositoriesThroughGraphQl;

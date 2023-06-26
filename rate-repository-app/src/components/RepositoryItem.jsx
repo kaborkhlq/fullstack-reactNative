@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, Pressable, Alert } from 'react-native';
 import Text from './Text'
 import theme from '../theme';
 
@@ -35,16 +35,49 @@ const styles = StyleSheet.create({
     flexItemB: {
         flexGrow: 0.2,
         font: theme.fonts
-    }
+    },
+    Button: {
+        backgroundColor: theme.colors.primary,
+        color: 'white',
+        padding: 3,
+        margin: 6,
+        borderRadius: 5,
+        paddingLeft: 10,
+        height: 35,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        fontSize: theme.fontSizes.subheading,
+        font: theme.fonts
+    },
 });
 
-const RepositoryItem = ({ repo }) => {
+
+const test = () => {
+    Alert.alert("hello")
+}
+
+
+const RepositoryItem = ({ repo, github }) => {
     const toThousands = x => {
         if (x < 1000) {
             return x
         }
-        x=Math.round(x/1000)
-        return x+'k'
+        x = Math.round(x / 1000)
+        return x + 'k'
+    }
+
+    const GithubButton = () => {
+        if (github) {
+            return (
+                <View>
+                    <Pressable onPress={test}>
+                        <Text style={styles.Button}>
+                            Open in Github
+                        </Text>
+                    </Pressable>
+                </View>
+            )
+        }
     }
 
     return (
@@ -58,7 +91,7 @@ const RepositoryItem = ({ repo }) => {
                     <Text fontWeight="bold" fontSize="subheading">{repo.fullName}</Text>
                     <Text color="textSecondary" style={{}}>{repo.description}</Text>
                     <View style={styles.flexContainerHorizontal}>
-                        <Text style={{ backgroundColor: theme.colors.primary, color: 'white', padding: 3, flex: 0, borderRadius: 5, font: theme.fonts, marginTop: 2 }}>{repo.language}</Text>
+                        <Text style={{ backgroundColor: theme.colors.secondary, color: 'white', padding: 3, flex: 0, borderRadius: 5, font: theme.fonts, marginTop: 2 }}>{repo.language}</Text>
                     </View>
                 </View>
             </View>
@@ -74,7 +107,11 @@ const RepositoryItem = ({ repo }) => {
                 <Text style={styles.flexItemA}>Reviews</Text>
                 <Text style={styles.flexItemA}>Rating</Text>
             </View>
+            <View>
+                <GithubButton />
+            </View>
         </View>
+
 
 
     );

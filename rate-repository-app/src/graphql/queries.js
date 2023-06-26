@@ -15,11 +15,13 @@ query repositories {
           ownerAvatarUrl
           description
           language
+          url
         }
       }
     }
   }
 `;
+
 
 export const ME = gql`
 query me {
@@ -29,4 +31,20 @@ query me {
   }
 }
 `;
-// other queries...
+
+export const GET_REPOSITORY = gql `
+query Repository($repositoryId: ID!) {
+  repository(id: $repositoryId) {
+    description
+    url
+    forksCount
+    language
+    name
+    ownerAvatarUrl
+    fullName
+    ratingAverage
+    reviewCount
+    stargazersCount
+  }
+}
+`;

@@ -1,8 +1,9 @@
 import { StyleSheet, View } from 'react-native';
 import RepositoryList from './RepositoryList';
+import SingleRepositoryList from './SingleRepository';
 import SignIn from './SignIn';
 import AppBar from './AppBar';
-import { Route, Routes, Navigate } from 'react-router-native';
+import { Route, Routes, useMatch } from 'react-router-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,13 +14,20 @@ const styles = StyleSheet.create({
   },
 });
 
+
 const Main = () => {
+  
+  const match = useMatch('/repo/:id')
+  const id = match ? match.params.id : null
+  console.log("From Main. Id:", id)
+
   return (
     <View style={styles.container}>
       <AppBar></AppBar>
       <Routes>
         <Route path="/" element={<RepositoryList />} exact />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/repo/:id" element={<SingleRepositoryList id={id} />} />
       </Routes>
     </View>
   );

@@ -7,5 +7,3 @@ mutation Mutation($credentials: AuthenticateInput) {
     }
   }
 `;
-
-// other queries...
