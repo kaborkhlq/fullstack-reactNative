@@ -68,7 +68,6 @@ const AppBar = () => {
     const { loading, error, data } = useQuery(ME, { Headers: { Authentication: token } });
     // const { loading, error, data } = useQuery(ME, { Headers: { Authentication: 'Bearer eeeeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiYmU0Mjk4NC0wNTFiLTRhMDEtYjQ1ZC1iOGQyOWMzMjIwMGMiLCJpYXQiOjE2ODc2OTQ1MDEsImV4cCI6MjI5MjQ5NDUwMSwic3ViIjoiYWNjZXNzVG9rZW4ifQ.dM4D-Fpn4ZSCEGnW6t3fYW656FZ4plt16vh9VS-MQIM' } });
     const response = loading ? undefined : data
-    console.log("From AppBar:", response)
 
     return (
         <Pressable>

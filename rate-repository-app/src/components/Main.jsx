@@ -19,7 +19,6 @@ const Main = () => {
   
   const match = useMatch('/repo/:id')
   const id = match ? match.params.id : null
-  console.log("From Main. Id:", id)
 
   return (
     <View style={styles.container}>

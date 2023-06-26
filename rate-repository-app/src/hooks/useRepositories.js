@@ -12,7 +12,6 @@ export const useRepositoriesThroughGraphQl = () => {
 };
 
 export const useRepository = (repositoryId) => {
-    console.log("id from userepository:", repositoryId)
     const params = {
         "repositoryId": repositoryId
     }   

@@ -1,6 +1,7 @@
 import { View, StyleSheet, Image, Pressable, Alert } from 'react-native';
 import Text from './Text'
 import theme from '../theme';
+import * as Linking from 'expo-linking';
 
 const styles = StyleSheet.create({
     item: {
@@ -52,8 +53,8 @@ const styles = StyleSheet.create({
 });
 
 
-const test = () => {
-    Alert.alert("hello")
+const transferToUrl = (url) => {
+    Linking.openURL(url);
 }
 
 
@@ -70,7 +71,7 @@ const RepositoryItem = ({ repo, github }) => {
         if (github) {
             return (
                 <View>
-                    <Pressable onPress={test}>
+                    <Pressable onPress={() => transferToUrl(repo.url)}>
                         <Text style={styles.Button}>
                             Open in Github
                         </Text>
