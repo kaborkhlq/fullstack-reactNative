@@ -11,9 +11,9 @@ const styles = StyleSheet.create({
 });
 
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, navigate }) => {
   const ItemSeparator = () => <View style={styles.separator} />;
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
   const goToRepo = (id) => {
     const url = "/repo/"+id
@@ -43,7 +43,8 @@ export const RepositoryListContainer = ({ repositories }) => {
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
-  return <RepositoryListContainer repositories={repositories} />;
+  const navigate = useNavigate();
+  return <RepositoryListContainer repositories={repositories} navigate={navigate}/>;
 };
 
 

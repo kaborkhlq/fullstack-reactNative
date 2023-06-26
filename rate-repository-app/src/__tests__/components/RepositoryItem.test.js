@@ -67,7 +67,7 @@ describe('RepositoryList', () => {
   
         // Add your test code here
 
-        render (<RepositoryListContainer repositories={repositories} />);
+        render (<RepositoryListContainer repositories={repositories} navigate={()=>{}}/>);
         screen.debug();
         expect(screen.getByText('jaredpalmer/formik')).toBeDefined();
         expect(screen.getByText('async-library/react-async')).toBeDefined();
