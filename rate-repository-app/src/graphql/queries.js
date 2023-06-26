@@ -22,6 +22,28 @@ query repositories {
   }
 `;
 
+export const GET_REVIEWS = gql`
+query reviews($repositoryId: ID!) {
+  repository(id: $repositoryId) {
+    id
+    fullName
+    reviews {
+      edges {
+        node {
+          id
+          text
+          rating
+          createdAt
+          user {
+            id
+            username
+          }
+        }
+      }
+    }
+  }
+}
+`;
 
 export const ME = gql`
 query me {

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { GET_REPOSITORIES, GET_REPOSITORY } from '../graphql/queries';
+import { GET_REPOSITORIES, GET_REPOSITORY, GET_REVIEWS } from '../graphql/queries';
 
 
 export const useRepositoriesThroughGraphQl = () => {
@@ -20,5 +20,14 @@ export const useRepository = (repositoryId) => {
     return { repository, loading };
 };
 
+export const useReviews = (repositoryId) => {
+    const params = {
+        "repositoryId": repositoryId
+    }   
+    const { loading, error, data} = useQuery(GET_REVIEWS, {variables: params, fetchPolicy: 'cache-and-network',})
+
+    const reviews = loading ? undefined : data.repository.reviews
+    return { reviews, loading };
+};
 
 export default useRepositoriesThroughGraphQl;

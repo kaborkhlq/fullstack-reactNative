@@ -1,8 +1,6 @@
 import { FlatList, View, StyleSheet, Text } from 'react-native';
 import RepositoryItem from './RepositoryItem'
-// import { useRepository, useRepositoriesThroughGraphQl  } from '../hooks/useRepositories';
-import useRepositories from '../hooks/useRepositories';
-
+import { useRepository } from '../hooks/useRepositories';
 
 
 const styles = StyleSheet.create({
@@ -16,22 +14,15 @@ const styles = StyleSheet.create({
 export const SingleRepository = ({ repository}) => {
   const ItemSeparator = () => <View style={styles.separator} />;
 
-
-
-  // const repositoryNodes = repository
-  //   ? repository.edges.map(edge => edge.node)
-  //   : [];
-  
-  const repositoryNodes = []
-  repositoryNodes.push(repository)
+  const repositoryNodes=[]
+  if (repository) {
+    repositoryNodes.push(repository) 
+  }
 
   return (
     <View style={{ marginBottom: 100 }} >
-      <Text>Hello from SingleRepository</Text>
-      {/* <Text>{id}</Text> */}
       <FlatList
         data={repositoryNodes}
-        // data={repository}
         ItemSeparatorComponent={ItemSeparator}
         renderItem={({ item }) => <RepositoryItem repo={item} github={true} />}
         // keyExtractor={item => item.id}
@@ -41,11 +32,8 @@ export const SingleRepository = ({ repository}) => {
 };
 
 const SingleRepositoryList = ({id}) => {
-  console.log("Id From SingleRepositoryList:", id)
-  // const { repository } = useRepository({repositoryId: id});
-  const { repositories } = useRepositories();
-  console.log("From SingleRepositoryList:", repositories)
-  return <SingleRepository repository={repositories}/>;
+  const {repository}  = useRepository(id);
+  return <SingleRepository repository={repository}/>;
 };
 
 
